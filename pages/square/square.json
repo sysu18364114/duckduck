@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "mp-searchbar": "/dropdownSelect/searchbar"
+  },
+  "navigationBarBackgroundColor":"#045828",
+  "navigationBarTextStyle":"white",
+  "navigationBarTitleText":"招募"
+}
+

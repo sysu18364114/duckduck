@@ -1,0 +1,47 @@
+<!--pages/evaluation/evaluation.wxml-->
+<!--搜索框-->
+<scroll-view class='scbg' scroll-y="true">
+  <view class="page">
+    <view class="page__bd">
+      <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
+    </view>
+  </view>
+
+  <block wx:for="{{list}}" wx:for-item="itemName" wx:for-index='id'>
+    <view class='box'>
+      <view class='firstblock'>
+        <image class='touxiang' src='{{itemName.face_url}}'></image>
+        <view class='person'>
+          <view class='name'>
+            <text class='showname'>{{itemName.username}}</text>
+          </view>
+          <view class='time'>
+            <text class='showtime'>{{itemName.send_timestamp}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class='secondblock'>
+        <view class='title'>
+          <text class='showtitle'>{{itemName.title}}</text>
+        </view>
+        <view class='content'>
+          <text class='showcontent'>{{itemName.content}}</text>
+        </view>
+        
+        <block wx:for="{{itemName.img_list}}" wx:for-item="item_name" wx:for-index='id'>
+          <view class='post_images'>
+            <image class='img' src='{{item_name.img_url}}'></image>
+          </view>
+        </block>
+      </view>
+
+      <view class='thirdblock'>
+        <image class='like' src='/images/灰点赞.png'></image>
+        <text class='num'>{{itemName.total_likes}}</text>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+
+<include src="/pages/bottom_menu/bottom_menu" />

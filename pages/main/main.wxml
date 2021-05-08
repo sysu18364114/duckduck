@@ -1,0 +1,54 @@
+<!--pages/main/main.wxml-->
+<scroll-view class='scbg' scroll-y="true">
+  <!--搜索框-->
+  <view class="page">
+    <view class="page__bd">
+      <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
+    </view>
+  </view>
+
+  <!-- 顶部推荐图片轮播 -->
+  <view class='carousel'>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" mode='scaleToFill' />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 分区入口-->
+  <view class='selection'>
+    <!-- 内容 -->
+    <view class='menu'>
+      <text>功能</text>
+    </view>
+    <view class='content'>
+      <view class='firstB'>
+        <view class='funcList' wx:for="{{contentImgUrls1}}" wx:key="url" wx:for-item="item">
+          <navigator url="{{item.page}}">
+            <image class='showpic' src="{{item.url}}" mode='scaleToFill'></image>
+            <text class='showtext'>{{item.title}}</text>
+          </navigator>
+        </view>
+      </view>
+
+      <view class='secondB'>
+        <view class='funcList' wx:for="{{contentImgUrls2}}" wx:key="url" wx:for-item="item">
+          <navigator url="{{item.page}}">
+            <image class='showpic' src="{{item.url}}" mode='scaleToFill'></image>
+            <text class='showtext'>{{item.title}}</text>
+          </navigator>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+
+</scroll-view>
+
+
+<!--底部栏页面引用-->
+<include src="/pages/bottom_menu/bottom_menu" />

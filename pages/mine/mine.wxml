@@ -1,0 +1,6 @@
+<!--pages/mine/mine.wxml-->
+<text>pages/mine/mine.wxml</text>
+
+<!--底部栏页面引用-->
+<include src="/pages/bottom_menu/bottom_menu" />
+

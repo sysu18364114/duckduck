@@ -1,0 +1,4 @@
+<!--pages/share/share.wxml-->
+<text>pages/share/share.wxml</text>
+
+<include src="/pages/bottom_menu/bottom_menu" />

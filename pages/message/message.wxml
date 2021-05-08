@@ -1,0 +1,5 @@
+<!--pages/message/message.wxml-->
+<text>pages/message/message.wxml</text>
+
+<!--底部栏页面引用-->
+<include src="/pages/bottom_menu/bottom_menu" />
