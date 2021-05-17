@@ -19,12 +19,12 @@
   </view>
 
   <!-- 分区入口-->
-  <view class='selection'>
+  <view class='panel'>
     <!-- 内容 -->
     <view class='menu'>
-      <text>功能</text>
+      <text>| 功能模块</text>
     </view>
-    <view class='content'>
+    <view class>
       <view class='firstB'>
         <view class='funcList' wx:for="{{contentImgUrls1}}" wx:key="url" wx:for-item="item">
           <navigator url="{{item.page}}">
@@ -46,8 +46,53 @@
     </view>
   </view>
 
+  <view class='panel'>
+    <!-- 实时动态内容 -->
+    <view class='menu'>
+      <text>| 实时动态</text>
+    </view>
+
+    <block wx:for="{{list}}" wx:for-item="itemName" wx:for-index='id'>
+      <view class='box'>
+        <view class='firstblock'>
+          <image class='touxiang' src='{{itemName.face_url}}'></image>
+          <view class='person'>
+            <view class='name'>
+              <text class='showname'>{{itemName.username}}</text>
+            </view>
+            <view class='time'>
+              <text class='showtime'>{{itemName.send_timestamp}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view class='secondblock'>
+          <view class='title'>
+            <text class='showtitle'>{{itemName.title}}</text>
+          </view>
+          <view class='content'>
+            <text class='showcontent'>{{itemName.content}}</text>
+          </view>
+
+          <block wx:for="{{itemName.img_list}}" wx:for-item="item_name" wx:for-index='id'>
+            <view class='post_images'>
+              <image class='img' src='{{item_name.img_url}}'></image>
+            </view>
+          </block>
+        </view>
+
+        <view class='thirdblock'>
+          <image class='like' src='/images/灰点赞.png'></image>
+          <text class='num'>{{itemName.total_likes}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
 
 </scroll-view>
+
+
+
 
 
 <!--底部栏页面引用-->

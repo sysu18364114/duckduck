@@ -13,8 +13,9 @@ Page({
     mine_pic: "/images/灰我的.png",
     //顶部轮播图
     imgUrls: [
-      '/images/picture1.jpg',
-      '/images/picture2.jpg'
+      '/images/picture2.jpg',
+      '/images/picture3.jpg',
+      '/images/picture4.jpg'
     ],
     //第一组功能
     contentImgUrls1:[
@@ -50,6 +51,44 @@ Page({
       }
     ],
 
+    /* 实时动态部分*/
+    list:[
+      {
+        face_url:"/images/头像1.jpg",
+        username:"BonnieBear",
+        send_timestamp:"2021-4-25 14:42",
+        title:"闲聊",
+        content:"bibidibobidiboo",
+        total_likes:99,
+      },
+      {
+        face_url:"/images/头像2.jpg",
+        username:"皮卡丘",
+        send_timestamp:"2021-4-25 01:35",
+        title:"兴趣",
+        content:"皮卡皮卡",
+        img_list:[
+          {img_url:"/post_imgs/img7.jpg"},
+          {img_url:"/post_imgs/img8.jpg"},
+          {img_url:"/post_imgs/img9.jpg"},
+          {img_url:"/post_imgs/img10.jpg"}
+        ],
+        total_likes:50,
+      },
+      {
+        face_url:"/images/头像3.jpg",
+        username:"毛利小五郎",
+        send_timestamp:"2021-4-20 01:35",
+        title:"公告",
+        content:"最近发生了一起入室盗窃案，希望大家向我们提供线索",
+        img_list:[
+          {img_url:"/post_imgs/img3.jpg"},
+          {img_url:"/post_imgs/img5.jpg"},
+          {img_url:"/post_imgs/img6.jpg"}
+        ],
+        total_likes:50,
+      },
+    ],
     //用户浏览部分
     
     indicatorDots: true, //显示面板显示点
