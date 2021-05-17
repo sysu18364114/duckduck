@@ -54,7 +54,7 @@ page {
 }
 
 .secondB {
-  margin-top: 5rpx;
+  margin-top: 12rpx;
   height: 200rpx;
   margin-left: 10rpx;
   margin-right: 10rpx;
@@ -67,24 +67,26 @@ page {
 
 .funcList{
   margin-top: 10rpx;
+  width: 225rpx;
 }
 
 .funcListInfo{
   border-top:2px; 
   border-bottom:2px; 
   display: flex;
-  padding: 2px 0;       /* 图片与字的间距 */
+  padding-top: 10rpx;      /* 图片与字的间距 */
 }
 
 .showpic {   /* 图片大小 */
   display: block;
-  width: 110px;
-  height: 85px;
-  margin: 0 auto;
+  width: 200rpx;
+  height: 180rpx;
+  margin-left: 5%;
+  margin-right: 5%;
   padding-top: 2px;
 }
 
-.showtext{
+.showtext{ /* 字体调整 */
   display: block;
   text-align: center;
   width: 100%;

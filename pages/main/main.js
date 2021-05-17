@@ -6,6 +6,11 @@ Page({
    */
   data: {
     disc_style:"bolder",
+    /* 底部导航栏颜色设置 */
+    disc_pic: "/images/绿发现.png",
+    add_pic: "/images/灰加号.png",
+    mesg_pic: "/images/灰消息.png",
+    mine_pic: "/images/灰我的.png",
     //顶部轮播图
     imgUrls: [
       '/images/picture1.jpg',
@@ -15,15 +20,15 @@ Page({
     contentImgUrls1:[
       {
         title: '树洞',
-        url: '/images/treehole2.png',
-        page: '/pages/square/square'
+        url: '/images/树洞.png',
+        page: '/pages/treehole/treehole'
       },{
         title: '招募',
-        url: '/images/recruit1.png',
+        url: '/images/招募.png',
         page: '/pages/recruit/recruit'
       },{
         title: '课程评价',
-        url: '/images/小鸭子.png',
+        url: '/images/课程评价.png',
         page: '/pages/evaluation/evaluation'
       }
     ],
@@ -32,15 +37,15 @@ Page({
     contentImgUrls2:[
       {
         title: '资料分享',
-        url: '/images/internship.png',
+        url: '/images/资料分享.png',
         page: '/pages/share/share'
       },{
         title: '闲置',
-        url: '/images/available.png',
+        url: '/images/闲置.png',
         page: '/pages/idle/idle'
       },{
         title: '失物招领',
-        url: '/images/lostandfound.png',
+        url: '/images/失物招领.png',
         page: '/pages/lost_found/lost_found'
       }
     ],

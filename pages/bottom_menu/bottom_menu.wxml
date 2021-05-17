@@ -1,22 +1,22 @@
 <!--pages/bottom_menu/bottom_menu.wxml-->
 <view class='bottom_row'>
   <view class='bottom_tab' bindtap="disc_select">
-    <image class='bottomImage' src='/images/灰发现.png'></image>
+    <image class='bottomImage' src='{{disc_pic}}'></image>
     <text class='bottom_tab_text' style='font-weight: {{disc_style}}'>发现</text>
   </view>
 
   <view class='bottom_tab' bindtap="add_select">
-    <image class='bottomImage' src='/images/灰加号.png'></image>
+    <image class='bottomImage' src='{{add_pic}}'></image>
     <text class='bottom_tab_text' style='font-weight: {{add_style}}'>发布</text>
   </view>
 
   <view class='bottom_tab' bindtap="mesg_select">
-    <image class='bottomImage' src='/images/灰消息.png'></image>
+    <image class='bottomImage' src='{{mesg_pic}}'></image>
     <text class='bottom_tab_text' style='font-weight: {{mesg_style}}'>消息</text>
   </view>
 
   <view class='bottom_tab' bindtap="mine_select">
-    <image class='bottomImage' src='/images/灰我的.png'></image>
+    <image class='bottomImage' src='{{mine_pic}}'></image>
     <text class='bottom_tab_text' style='font-weight: {{mine_style}}'>我的</text>
   </view>
 </view>

@@ -6,6 +6,10 @@ Page({
    */
   data: {
     mine_style:"bolder",
+    disc_pic: "/images/灰发现.png",
+    add_pic: "/images/灰加号.png",
+    mesg_pic: "/images/灰消息.png",
+    mine_pic: "/images/绿我的.png",
   },
 
   //页面跳转
