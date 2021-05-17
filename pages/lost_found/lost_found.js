@@ -1,4 +1,6 @@
 // pages/lost_found/lost_found.js
+var Bmob = require('../../utils/Bmob-2.2.5.min.js');
+
 Page({
 
   /**
