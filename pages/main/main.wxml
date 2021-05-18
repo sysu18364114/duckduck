@@ -54,6 +54,7 @@
 
     <block wx:for="{{list}}" wx:for-item="itemName" wx:for-index='id'>
       <view class='box'>
+        <!--帖主信息-->
         <view class='firstblock'>
           <image class='touxiang' src='{{itemName.face_url}}'></image>
           <view class='person'>
@@ -66,6 +67,7 @@
           </view>
         </view>
 
+        <!--帖子文字内容-->
         <view class='secondblock'>
           <view class='title'>
             <text class='showtitle'>{{itemName.title}}</text>
@@ -74,16 +76,27 @@
             <text class='showcontent'>{{itemName.content}}</text>
           </view>
 
-          <block wx:for="{{itemName.img_list}}" wx:for-item="item_name" wx:for-index='id'>
-            <view class='post_images'>
-              <image class='img' src='{{item_name.img_url}}'></image>
+          <!-- 帖子图片 -->
+          <view class='photo-view'>
+            <view class='photo' wx:for='{{itemName.img_list}}' wx:for-item="item_name" style='width:100px;height:100px'>
+              <image bindtap='LookPhoto' data-photUrl='{{item_name.img_url}}' src='{{item_name.img_url}}'
+                style='width:100px;height:100px'></image>
             </view>
-          </block>
+          </view>
         </view>
 
+        <!--点赞评论-->
         <view class='thirdblock'>
-          <image class='like' src='/images/灰点赞.png'></image>
-          <text class='num'>{{itemName.total_likes}}</text>
+          <view class='likes-view'>
+            <image class='icon' src='/images/灰点赞.png'></image>
+            <text class='num'>{{itemName.total_likes}}</text>
+          </view>
+
+          <view class='comment-view'>
+            <image class='icon' src='/images/灰评论.png'></image>
+            <text class='num'>{{itemName.total_likes}}</text>
+          </view>
+
         </view>
       </view>
     </block>
