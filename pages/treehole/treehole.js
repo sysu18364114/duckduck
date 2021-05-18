@@ -10,6 +10,7 @@ Page({
     add_pic: "/images/灰加号.png",
     mesg_pic: "/images/灰消息.png",
     mine_pic: "/images/灰我的.png",
+   //如果需要修改不同图片数量时图片展示的大小可以修改这里 photoWidth: wx.getSystemInfoSync().windowWidth / 5,
     list:[
       {
         face_url:"/images/绿我的.png",

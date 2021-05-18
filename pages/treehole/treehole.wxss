@@ -13,6 +13,7 @@ page {
   right: 0rpx;
   top: 0rpx;
   position: absolute;
+  display:flex;
 }
 
 .box {
@@ -75,8 +76,7 @@ page {
   margin-top: 10rpx;
   margin-left: 4%;
   margin-right: 4%;
-  padding-bottom: 20rpx;
-  border-bottom: 5rpx solid #bbbbbb;
+  display:block;
 }
 
 .title {
@@ -104,18 +104,8 @@ page {
   word-break: normal;
 }
 
-.post_images {
-  width: 200rpx;
-}
-.img {
-  width: 180rpx;
-  height: 180rpx;
-  margin-left: 10rpx;
-  margin-top: 10rpx;
-}
-
-
 .thirdblock {
+  margin-top: 20rpx;
   height: 100rpx;
   margin-left: 4%;
   margin-right: 4%;
@@ -123,18 +113,39 @@ page {
   justify-content: flex-start;
 }
 
-.like {
-  margin-top: 20rpx;
+.icon {
+  margin-top: 5rpx;
   margin-left: 20rpx;
   width: 50rpx;
   height: 50rpx;
+  vertical-align: top;
+}
+
+.comment-view{
+  margin-left:300rpx;
 }
 
 .num {
   height: 52rpx;
   line-height: 50rpx;
-  margin-top: 25rpx;
   margin-left: 20rpx;
   font-size: 30rpx;
   color: #101010;
+  vertical-align: top;
+}
+
+
+/* 图片 */
+.photo-view{
+  margin-top: 10rpx;
+  margin-left: 4%;
+  margin-right: 4%;
+  padding-bottom: 20rpx;
+  display:inline-block;
+}
+
+.photo{  
+  float: left;
+  margin-right: 10rpx;
+  margin-top: 10rpx;
 }
