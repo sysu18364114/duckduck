@@ -9,7 +9,7 @@ Page({
   data: {
     add_style:"bolder",
     disc_pic: "/images/灰发现.png",
-    add_pic: "/images/绿加号.png",
+    add_pic: "/images/绿                                                                                           加号.png",
     mesg_pic: "/images/灰消息.png",
     mine_pic: "/images/灰我的.png",
     img_url:[],

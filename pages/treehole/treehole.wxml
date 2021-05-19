@@ -44,7 +44,7 @@
       <!--点赞评论-->
       <view class='thirdblock'>
         <view class='likes-view'>
-          <image class='icon' src='/images/灰点赞.png'></image>
+          <image class='icon' src='/images/灰点赞.png' bindtap="click_like"></image>
           <text class='num'>{{itemName.total_likes}}</text>
         </view>
         
