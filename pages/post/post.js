@@ -1,5 +1,6 @@
 // pages/post/post.js
 var util = require('../../utils/util.js');
+var Bomb = require('../../utils/Bmob-2.2.5.min.js');
 
 Page({
 
@@ -9,11 +10,21 @@ Page({
   data: {
     add_style:"bolder",
     disc_pic: "/images/灰发现.png",
-    add_pic: "/images/绿                                                                                           加号.png",
+    add_pic: "/images/绿加号.png",
     mesg_pic: "/images/灰消息.png",
     mine_pic: "/images/灰我的.png",
-    img_url:[],
-    content:""
+    tabList:[
+      {name:"树洞", isSelect:false},
+      {name:"招募", isSelect:false},
+      {name:"课程评价", isSelect:false},
+      {name:"资料分享", isSelect:false},
+      {name:"闲置", isSelect:false},
+      {name:"失物招领", isSelect:false}
+    ],
+    label:"",
+    title:"",
+    content:"",
+    img_url:[]
   },
 
   
@@ -87,6 +98,21 @@ Page({
     this.setData({content:e.detail.value});
   },
 
+  //选择标签
+  bindChangeTab(e) {
+    console.log(e.currentTarget.dataset.index)
+    var tab = this.data.tabList
+    for (var i = 0; i < tab.length; i++) {
+      tab[i].isSelect = false
+    }
+    tab[e.currentTarget.dataset.index].isSelect = true
+    this.setData({
+      tabList: tab,
+      tabIndex: e.currentTarget.dataset.index
+    })
+    this.label = tab[e.currentTarget.dataset.index].name
+  },
+
   //选择图片
   chooseimage: function(){
     var me = this;
@@ -101,7 +127,9 @@ Page({
           for (let i = 0; i < res.tempFilePaths.length; i++) {
             img_url.push(res.tempFilePaths[i])
           }
-          me.setData({img_url: img_url})
+          me.setData({
+            img_url: img_url
+          })
           //当图片数量大雨9张，隐藏添加图片的按钮
           if (res.tempFilePaths.length >= 8){
             me.setData({
@@ -113,57 +141,6 @@ Page({
               hideAdd: 0
             })
           }
-        }
-      }
-    })
-  },
-
-  //上传图片
-  img_upload: function (goodsId){
-    var me = this;
-    var imgFilePaths = me.data.img_url;
-    var count = me.data.count;
-    var serverUrl = app.serverUrl;
-    wx.showLoading({
-      title: '上传图片中--',
-    })
-    wx.uploadFile({
-      url: serverUrl + '/goods/uploadGoodsImg', 
-      filePath: imgFilePaths[count],
-      name: 'file',
-      formData: {
-        goodsId: goodsId      },
-      success: function (res) {
-          //可统计成功上传图片数
-      },
-      fail: function (res) {
-          //可统计上传失败图片数
-      },
-      complete: function (res) {
-        count++;
-        me.setData({
-          count: count        })
-        if (count >= imgFilePaths.length) {
-          var data = JSON.parse(res.data);
-          console.log(data);
-          wx.hideLoading();
-          if (data.status == 200) {
-            wx.hideLoading();
-            wx.showToast({
-              title: '上传成功!~~',
-              icon: 'success'
-            });
-            me.setData({
-              count: 0
-            })
-          } else if (data.status == 500) {
-            wx.showToast({
-              title: data.msg,
-            });
-          }
-        } else {
-          //图片未上传完，递归调用本方法。
-          me.uploadGoodsImg(goodsId);
         }
       }
     })
@@ -185,25 +162,98 @@ Page({
 
   //删除图片
   deleteImg: function (e){
-    var me = this;
-    var img_url = me.data.img_url;
-    var index = e.target.dataset.index;
-    img_url.splice(index, 1); 
-    me.setData({
-      img_url: img_url,
-      //若当前图片超过9张，则隐藏添加图标；少于9张则显示添加图标。
-      hideAdd: me.data.img_url.length <9 ? false : true
+    wx.showModal({
+      title: '要删除这张图片吗？',
+      content: '',
+      cancelColor: '取消',
+      confirmText: '确定',
+      success: res => {
+        if (res.confirm) {
+          this.data.img_url.splice(e.currentTarget.dataset.index, 1);
+          this.setData({
+            img_url: this.data.img_url
+          })
+        }
+      }
     })
   },
 
   //发布动态
+  /*
+    objectId, userPtr, labels, likes, img1, img2, ...,
+    userID, PostText, PostTitle, username, createdAt, updatedAt, ACL
+  */
   submit: function(){
     var that = this;
-    var user_id = wx.getStorageSync('userid')
+    //var user_id = wx.getStorageSync('userid')
     wx.showLoading({
       title: '正在发布',
     })
-    that.img_upload()
+    //that.img_upload()
+
+    let current = Bmob.User.current();
+    console.log(current)
+    that.setData({
+      userID: current.objectId,
+      username: current.username
+    })
+
+    const query = Bmob.Query('Post');
+    query.set('userID', that.userID)
+    query.set('username', that.username)
+    //query.set('labels')
+  },
+
+  //上传图片
+  img_upload: function (){
+    let that = this;
+    let img_url = that.data.img_url;
+    let img_url_ok = [];
+    for (let i=0; i<img_url.length; i++){
+      wx.uploadFile({
+        filePath: img_url[i],
+        name: 'file',
+        url: 'http://wechat.homedoctor.com/Moments/upload_do',
+        formData: {
+          'user': 'test'
+        },
+        succes: function(res) {
+          console.log('上传成功');
+          img_url_ok.push(res.data)
+          if (img_url_ok.length == img_url.length) {
+            var userid = wx.getStorageSync('userid');
+            var content = that.data.content;
+            wx.request({
+              url: 'http://wechat.homedoctor.com/Moments/adds',
+              data: {
+                user_id: userid,
+                images: img_url_ok,
+                content: content,
+              },
+              success: function(res) {
+                if (res.data.status == 1){
+                  wx.hideLoading()
+                  wx.showModal({
+                    title: '提交成功',
+                    showCancel: false,
+                    success: function(res) {
+                      if (res.confirm) {
+                        wx.navigateTo({
+                          url: '/pages/main/main',
+                        })
+                      }
+                    }
+                  })
+                }
+              }
+            })
+          }
+        },
+        fail: function(res){
+          console.log('上传失败')
+        }
+      })
+    }
   },
 
   //页面跳转

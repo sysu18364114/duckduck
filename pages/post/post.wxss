@@ -3,18 +3,75 @@
 
 
 .page{
-  padding: 20px
+  padding: 20px；
  }
 
+ .type{
+  margin-top: 3px;
+  margin-left: 10px;
+  margin-bottom: 3px;
+  font-size: 38rpx;
+ }
+
+ .tab {
+  display: flex;
+  font-family: Arial, sans-serif;
+  flex-direction: row;
+  color: #4c5154;
+  justify-content: space-around;
+  background-color: #fff;
+  font-size: 30rpx;
+  margin-top: 1px;
+  margin-bottom: 5px;
+}
+
+.tab-se {
+  color: #300010;
+  padding: 8rpx 5rpx;
+  font-weight: 600;
+  background-color: #26bd26;
+}
+
+.tab-no {
+  padding: 8rpx 5rpx;
+  background-color: #e2e1e1;
+}
+
+  .title{
+    margin-top: 8px;
+    margin-left: 10px;
+    margin-bottom: 3px;
+  }
+
+  .input_title{
+    font-size: 35rpx;
+    color: #000;
+    margin-bottom: 5px;
+  }
+
+  .word{
+    font-size: 38rpx;
+    margin-bottom: 5px;
+  }
+
  .image{
-  width:31%;
-  height: 100px;
-  padding: 2px
+  margin: 6rpx;
+  position: relative;
+  width: 200rpx;
+  height: 200rpx;
+  background: gainsboro;
  }
 
  .moment_img{
-  width: 98px;
-  height: 98px;
+  width: 100%;
+  height: 100%;
+ }
+
+ .del_img {
+  position: absolute;
+  right: 0px;
+  width: 40rpx;
+  height: 40rpx;
  }
 
  .add_img{
@@ -28,6 +85,12 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px
+ }
+
+ .weui-cell{
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 35rpx;
  }
 
  .weui-btn{

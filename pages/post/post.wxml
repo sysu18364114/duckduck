@@ -2,8 +2,22 @@
 <!--发布-->
 <view class="page">
   <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{errorMsg}}</view>
-  
+
   <view class="weui-cells weui-cells_after-title">
+    <view class="type">标签</view>
+    <view class="tab">
+      <block wx:for="{{tabList}}" wx:key='{{index}}'>
+        <view bindtap='bindChangeTab' data-index='{{index}}' class='{{item.isSelect?"tab-se":"tab-no"}}'>{{item.name}}</view>
+      </block>
+    </view>
+
+    <view class="title">
+      <view class="input_title">
+        <text class="word">标题</text>
+        <textarea class="weui-textarea" auto-focus bindfocus="bindfocus" bindinput="bindinput" placeholder="请输入标题" style="height: 1.5em"/>
+      </view>
+    </view>
+
     <view class="weui-cell">
       <view class="weui-cell__bd">
         <textarea class="weui-textarea" auto-focus bindfocus="bindfocus" bindinput="bindinput" placeholder="这一刻的想法..." style="height: 5.3em" />
@@ -11,9 +25,12 @@
     </view>
 
     <view class="image_content">
-      <view class="image" wx:for="{{img_url}}">
-        <image class="moment_img" src="{{item}}"></image>
-      </view>
+      <block wx:for="{{img_url}}" wx:key="index">
+        <view class="image">
+          <image class="moment_img" src="{{item}}"></image>
+          <image class="del_img" bindtap="deleteImg" src="/images/close.png"></image>
+        </view>
+      </block>
       <view class="image" style='display:{{hideAdd?"none":"block"}}'>
         <image bindtap="chooseimage" class="add_img" src="/images/add.png"></image>
       </view>
