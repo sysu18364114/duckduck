@@ -209,12 +209,11 @@ Page({
       */
     })
 
-    that.userID = "c2021895d";
-    that.username = "TS7yc";
+    const pointer = Bmob.Pointer('_User')
+    const poiID = pointer.set("c20197249b")
     
     const query = Bmob.Query('Post');
-    query.set('userID', that.userID)
-    query.set('username', that.username)
+    query.set('userPtr', poiID)
     query.set('labels', that.label);
     query.set('PostTitle', that.title);
     query.set('PostText', that.content);
@@ -254,8 +253,17 @@ Page({
       wx.hideLoading({
         success: (res) => {},
       })
-      wx.showToast({
-        title: '发布成功',
+      setTimeout(() => {
+        wx.showToast({
+          title: "发布成功",
+          icon: "success",
+        });
+        setTimeout(() => {
+          wx.hideToast();
+        }, 1000)
+      }, 0);
+      wx.redirectTo({
+        url: '../main/main',
       })
     }).catch(err => {
       console.log(err)
@@ -263,9 +271,15 @@ Page({
         success: (res) => {
         },
       })
-      wx.showToast({
-        title: '发布失败',
-      })
+      setTimeout(() => {
+        wx.showToast({
+          title: "发布失败",
+          icon: "error",
+        });
+        setTimeout(() => {
+          wx.hideToast();
+        }, 1000)
+      }, 0);
     })
 
 
