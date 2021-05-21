@@ -1,2 +1,118 @@
 /* pages/mine/mine.wxss */
 @import "/pages/bottom_menu/bottom_menu";
+
+/* Flex是Flexible Box的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性。设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。 */
+.flex-wrp {
+  /* 创建一个 flex 容器 */
+  display: flex;
+}
+
+.flex-item {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.container {
+  /*position: absolute;*/
+  display: inline-block;
+  width: 45rpx;
+  height: 45rpx;
+  border-radius: 45rpx;
+  top: 10rpx;
+  vertical-align: middle;
+}
+
+/* 容器和图标的样式 */
+.container .avatar {
+  position: relative;
+  display: inline-block;
+}
+
+
+/* 包含了头像、昵称、查看或编辑个人主页的盒子的属性 */
+.user {
+  width: 725rpx;
+  background: #ffffff;
+  padding: 30rpx 25rpx 30rpx 0;
+  margin: 35rpx 0 0 0;
+  border-top: 2px solid #999999;
+  border-bottom: 2px solid #999999;
+  box-shadow: 0 2px 5px #eeeeee;
+}
+
+/* 设置用户栏和用户图标的格式 */
+.user .userinfo-avatar {
+  flex: 1;
+  display: inline-block;
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 105rpx;
+  border-style: solid;
+  border-color: #999999;
+  border-width: 2rpx;
+}
+
+/* 设置个人信息中文本的排版 */
+.user .user-info {
+  /* flex 让所有弹性盒模型对象的子元素都有相同的长度，且忽略它们内部的内容 */
+  flex: 5;
+  text-align: left;
+}
+
+/* 设置个人信息中文本的属性 */
+.user .user-info text {
+  display: block;
+}
+
+/* 设置昵称的属性 */
+.user .user-info .userinfo-nickname {
+  padding: 8rpx 0 10rpx 0;
+  font-size: 35rpx;
+  letter-spacing: 3rpx;
+  color: #818A8F;
+}
+
+/* 设置“查看或编辑个人主页”的属性 */
+.user .user-info .edit {
+  font-size: 35rpx;
+  line-height: 34rpx;
+  letter-spacing: 3rpx;
+  color: #999999;
+}
+
+.my {
+  margin: 30rpx 0 0 0;
+  border-top: solid 2px #999999;
+  border-bottom: solid 2px #999999;
+}
+
+.my .my-item {
+  width: 750rpx;
+  background: #ffffff;
+  padding: 0
+}
+
+.my .my-item .myitem-icon {
+  flex: 1;
+}
+
+.my .my-item .myitem-icon image {
+  width: 45rpx;
+  height: 45rpx;
+  padding: 37.5rpx 0;
+}
+
+.my .my-item .myitem-name {
+  flex: 5;
+  text-align: left;
+  font-size: 34rpx;
+  color: #999999;
+  line-height: 60rpx;
+  padding: 30rpx 0;
+  border-bottom: solid 1px #999999;
+  border-width: 2rpx;
+}
+
+.my .my-item:last-child .myitem-name {
+  border-bottom: none;
+}

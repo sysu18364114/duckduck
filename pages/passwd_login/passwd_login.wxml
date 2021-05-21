@@ -1,0 +1,25 @@
+<view class="container">
+
+    <image class="login-img" src="/images/鸭子 duck.png"></image>
+
+    <view class="login-item">
+
+        <view class="line"></view>
+
+        <view class="item-view">
+            <image class="input-image" src="/images/icons/account.png"></image>
+            <input class="input-box" placeholder="手机号码" bindinput="phoneNumInput" />
+        </view>
+
+        <view class="line"></view>
+
+        <view class="item-view">
+            <image class="input-image" src="/images/icons/account.png"></image>
+            <input class="input-box" password placeholder="密码" bindinput="passwdInput" />
+        </view>
+
+        <view class="line"></view>
+
+        <button class="button-2" bindtap="passwdLogin">登陆账户</button>
+    </view>
+</view>

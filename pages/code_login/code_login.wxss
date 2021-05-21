@@ -1,0 +1,116 @@
+/* pages/code_login/code_login.wxss */
+/* pages/register/register.wxss */
+page {
+    background: #F0F0F0;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .line { 
+    margin-top: 8px; 
+   } 
+  
+  /*登录图片*/
+  .login-img {
+    display: inline-block;
+    width: 150rpx;
+    height: 150rpx;
+    margin-top: 50rpx;
+    border: 1px solid #999999;
+    border-radius: 150rpx;
+  }
+  
+  .login-item {
+    margin-top: 10px;
+    flex: auto;
+    height: 100%;
+  }
+  
+  .item-view {
+    /* background-color: #fff;  */
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+    align-items: center;
+  
+    line-height: 45px;
+    border-radius: 20px;
+    border: 1px solid #999999;
+    width:300px;
+  }
+
+  .text-view {
+    /* background-color: #fff;  */
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .text-style{
+    text-align: center;
+    margin-top: 10px;
+    color: #1aad19;
+    font-weight:bolder;
+    letter-spacing: 4rpx;
+  }
+  
+  /*输入框图标*/
+  .input-image{ 
+    margin-left: 10px;
+    width: 18px; 
+    height: 16px;
+   } 
+  /*输入框*/
+  .input-box{
+    text-align: left;
+    margin-left: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #cccccc;
+    width: 600rpx;
+    font-size: 14px;
+    letter-spacing: 10rpx;
+  }
+  
+  .input-box-code{
+    flex-direction: row;
+    text-align: left;
+    margin-left: 8px;
+    margin-right: 22px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #cccccc;
+    width: 250rpx;
+    font-size: 14px;
+    letter-spacing: 10rpx;
+  }
+  
+  .button-1{
+    font-size: 14px;
+    width: 40% !important;
+    font-weight: 400;
+    font-weight: bolder;
+    color: #fff;
+    border-radius: 10px;
+    border:1px solid #1aad19;
+    background:linear-gradient(180deg,#1aad19 0%,#1aad19 100%);
+  }
+
+   .button-2{
+    font-size: 14px;
+    width: 100% !important;
+    font-weight: 400;
+    color: #fff;
+    border-radius: 10px;
+    letter-spacing: 10rpx;
+    font-weight:bolder;
+    border:1px solid #1aad19;
+    background:linear-gradient(180deg,#1aad19 0%,#1aad19 100%);
+  }

@@ -17,7 +17,11 @@
     "pages/treehole/treehole",
     "pages/evaluation/evaluation",
     "pages/lost_found/lost_found",
-    "pages/idle/idle"
+    "pages/idle/idle",
+    "pages/login_register/login_register",
+    "pages/register/register",
+    "pages/code_login/code_login",
+    "pages/passwd_login/passwd_login"
   ],
   "window":{
     "backgroundTextStyle":"light",

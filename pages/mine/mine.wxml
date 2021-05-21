@@ -1,6 +1,84 @@
 <!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+
+<!-- <view class="container more"> -->
+<block wx:if="{{!loginStatus}}">
+  <view class="user flex-wrp">
+    <view class="avatar flex-item">
+      <image class="userinfo-avatar" src="/images/鸭子 duck.png" background-size="cover" bindtap="registerSelect"></image>
+    </view>
+    <view class="user-info flex-item">
+      <text class="userinfo-nickname">你好！</text>
+      <text class="edit">请点击左侧头像注册/登录</text>
+    </view>
+  </view>
+</block>
+<block wx:else>
+  <view class="user flex-wrp">
+    <view class="avatar flex-item">
+      <image class="userinfo-avatar" src="/images/鸭子 duck.png" background-size="cover" bindtap="naviRegistPage"></image>
+    </view>
+    <view class="user-info flex-item">
+      <text class="userinfo-nickname">{{testName}}  已登录</text>
+      <text class="edit">查看或编辑个人主页</text>
+    </view>
+  </view>
+</block>
+
+<view class="my">
+  <view class="my-item flex-wrp">
+    <view class="myitem-icon flex-item">
+      <image src="/images/icons/eye.png"></image>
+    </view>
+    <view class="myitem-name flex-item">
+      <text>我的关注</text>
+    </view>
+  </view>
+  <view class="my-item flex-wrp">
+    <view class="myitem-icon flex-item">
+      <image src="/images/icons/star.png"></image>
+    </view>
+    <view class="myitem-name flex-item">
+      <text>我的收藏</text>
+    </view>
+  </view>
+  <view class="my-item flex-wrp">
+    <view class="myitem-icon flex-item">
+      <image src="/images/icons/draft.png"></image>
+    </view>
+    <view class="myitem-name flex-item">
+      <text>我的草稿</text>
+    </view>
+  </view>
+  <view class="my-item flex-wrp">
+    <view class="myitem-icon flex-item">
+      <image src="/images/icons/recent.png"></image>
+    </view>
+    <view class="myitem-name flex-item">
+      <text>最近浏览</text>
+    </view>
+  </view>
+  <view class="my-item flex-wrp">
+    <view class="myitem-icon flex-item">
+      <image src="/images/icons/book.png"></image>
+    </view>
+    <view class="myitem-name flex-item">
+      <text>我的帖子</text>
+    </view>
+  </view>
+  <view class="my-item flex-wrp">
+    <view class="myitem-icon flex-item">
+      <image src="/images/icons/live.png"></image>
+    </view>
+    <view class="myitem-name flex-item">
+      <text>我的聊天</text>
+    </view>
+  </view>
+
+  <view style="height:100rpx"></view>
+
+</view>
+<!-- </view> -->
+
 
 <!--底部栏页面引用-->
 <include src="/pages/bottom_menu/bottom_menu" />
-

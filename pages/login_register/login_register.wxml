@@ -1,0 +1,19 @@
+<!--pages/login_register/login_register.wxml-->
+<view class="container">
+
+    <image class="login-img" src="/images/鸭子 duck.png"></image>
+
+    <view class="text-view">
+        <text class="text-style">请选择您的登陆方式</text>
+    </view>
+
+    <!-- 选择登陆方式 -->
+    <view class="line"></view>
+    <button class="button-2" bindtap="smsCodeButtonClick">验证码登陆</button>
+    <view class="line"></view>
+    <button class="button-2" bindtap="passwdButtonClick">密码登陆</button>
+    <!-- 没有账户要先完成注册 -->
+    <view class="line"></view>
+    <button class="button-2 button-color" bindtap="registerButtonClick">没有账号？立即注册</button>
+    <view class="line"></view>
+</view>
