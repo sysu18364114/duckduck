@@ -1,6 +1,6 @@
 // pages/post/post.js
 var util = require('../../utils/util.js');
-var Bomb = require('../../utils/Bmob-2.2.5.min.js');
+var Bmob = require('../../utils/Bmob-2.2.5.min.js');
 
 Page({
 
@@ -81,7 +81,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    
   },
 
   input: function(e){
@@ -90,12 +90,17 @@ Page({
     })
   },
 
-  bindfocus:function(){
-    util.clearError(this);
+  
+
+
+  //输入标题
+  bindinputTitle: function(e) {
+    this.title = e.detail.value;
   },
 
+  //输入内容
   bindinput: function(e) {
-    this.setData({content:e.detail.value});
+    this.content = e.detail.value;
   },
 
   //选择标签
@@ -130,6 +135,7 @@ Page({
           me.setData({
             img_url: img_url
           })
+          me.img_url = img_url
           //当图片数量大雨9张，隐藏添加图片的按钮
           if (res.tempFilePaths.length >= 8){
             me.setData({
@@ -179,82 +185,77 @@ Page({
   },
 
   //发布动态
-  /*
-    objectId, userPtr, labels, likes, img1, img2, ...,
-    userID, PostText, PostTitle, username, createdAt, updatedAt, ACL
-  */
   submit: function(){
     var that = this;
-    //var user_id = wx.getStorageSync('userid')
     wx.showLoading({
       title: '正在发布',
     })
-    //that.img_upload()
-
+    
     let current = Bmob.User.current();
-    console.log(current)
     that.setData({
+      /*
       userID: current.objectId,
       username: current.username
+      */
     })
 
+    that.userID = "c2021895d";
+    that.username = "TS7yc";
+    
     const query = Bmob.Query('Post');
     query.set('userID', that.userID)
     query.set('username', that.username)
-    //query.set('labels')
+    query.set('labels', that.label);
+    query.set('PostTitle', that.title);
+    query.set('PostText', that.content);
+    query.set('likes', 0);
+    query.set('comment', 0);
+  
+    //上传帖子内容至云数据库
+    query.save().then(res => {
+      console.log(res)
+      //上传图片
+      var img_url = that.img_url
+      var file;
+      var imgname = "img";
+      var n = 1;
+      var ID = res.objectId;            //获取帖子ID
+      for(let item of img_url){         //将图片上传到Bmob云端中
+        file = Bmob.File(imgname.concat(n.toString()).concat(".jpg"), item);
+        n = n + 1;
+      }
+      n = 1;
+      file.save().then(res1 => {        //上传图片到同一条帖子
+        query.set('id', ID);            //根据帖子ID修改某条记录
+        query.set(imgname.concat(n.toString()), res1[n-1].url);
+        n = n + 1;
+        query.save().then(res2 => {
+          console.log(res2)
+        }).catch(err2 => {
+          console.log(err2)
+        })
+      })
+      wx.hideLoading({
+        success: (res) => {},
+      })
+      wx.showToast({
+        title: '发布成功',
+      })
+    }).catch(err => {
+      console.log(err)
+      wx.hideLoading({
+        success: (res) => {
+        },
+      })
+      wx.showToast({
+        title: '发布失败',
+      })
+    })
+
+
+
   },
 
-  //上传图片
-  img_upload: function (){
-    let that = this;
-    let img_url = that.data.img_url;
-    let img_url_ok = [];
-    for (let i=0; i<img_url.length; i++){
-      wx.uploadFile({
-        filePath: img_url[i],
-        name: 'file',
-        url: 'http://wechat.homedoctor.com/Moments/upload_do',
-        formData: {
-          'user': 'test'
-        },
-        succes: function(res) {
-          console.log('上传成功');
-          img_url_ok.push(res.data)
-          if (img_url_ok.length == img_url.length) {
-            var userid = wx.getStorageSync('userid');
-            var content = that.data.content;
-            wx.request({
-              url: 'http://wechat.homedoctor.com/Moments/adds',
-              data: {
-                user_id: userid,
-                images: img_url_ok,
-                content: content,
-              },
-              success: function(res) {
-                if (res.data.status == 1){
-                  wx.hideLoading()
-                  wx.showModal({
-                    title: '提交成功',
-                    showCancel: false,
-                    success: function(res) {
-                      if (res.confirm) {
-                        wx.navigateTo({
-                          url: '/pages/main/main',
-                        })
-                      }
-                    }
-                  })
-                }
-              }
-            })
-          }
-        },
-        fail: function(res){
-          console.log('上传失败')
-        }
-      })
-    }
-  },
 
   //页面跳转
   disc_select: function(){

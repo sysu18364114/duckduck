@@ -14,13 +14,13 @@
     <view class="title">
       <view class="input_title">
         <text class="word">标题</text>
-        <textarea class="weui-textarea" auto-focus bindfocus="bindfocus" bindinput="bindinput" placeholder="请输入标题" style="height: 1.5em"/>
+        <textarea class="weui-textarea" bindinput="bindinputTitle" placeholder="请输入标题" style="height: 1.5em"/>
       </view>
     </view>
 
     <view class="weui-cell">
       <view class="weui-cell__bd">
-        <textarea class="weui-textarea" auto-focus bindfocus="bindfocus" bindinput="bindinput" placeholder="这一刻的想法..." style="height: 5.3em" />
+        <textarea class="weui-textarea" bindinput="bindinput" placeholder="这一刻的想法..." style="height: 5.3em" />
       </view>
     </view>
 
