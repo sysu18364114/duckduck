@@ -24,6 +24,7 @@ Page({
     label:"",
     title:"",
     content:"",
+    img_num:0,
     img_url:[]
   },
 
@@ -126,6 +127,7 @@ Page({
       sizeType: ['original', 'compressed'],
       courceType: ['album', 'camera'],
       success: function(res){
+        var img_num = 0;
         if (res.tempFilePaths.length > 0) {
           //把每次选择的图push进数组
           let img_url = me.data.img_url;
@@ -136,6 +138,7 @@ Page({
             img_url: img_url
           })
           me.img_url = img_url
+          img_num = img_num + 1;
           //当图片数量大雨9张，隐藏添加图片的按钮
           if (res.tempFilePaths.length >= 8){
             me.setData({
@@ -148,6 +151,10 @@ Page({
             })
           }
         }
+        me.setData({
+          img_num: img_num
+        })
+        me.img_num = img_num
       }
     })
   },
@@ -175,10 +182,13 @@ Page({
       confirmText: '确定',
       success: res => {
         if (res.confirm) {
+          var img_num = this.img_num - 1;
           this.data.img_url.splice(e.currentTarget.dataset.index, 1);
           this.setData({
-            img_url: this.data.img_url
+            img_url: this.data.img_url,
+            img_num: img_num
           })
+          this.img_num = img_num
         }
       }
     })
@@ -215,26 +225,32 @@ Page({
     query.save().then(res => {
       console.log(res)
       //上传图片
-      var img_url = that.img_url
-      var file;
-      var imgname = "img";
-      var n = 1;
-      var ID = res.objectId;            //获取帖子ID
-      for(let item of img_url){         //将图片上传到Bmob云端中
-        file = Bmob.File(imgname.concat(n.toString()).concat(".jpg"), item);
-        n = n + 1;
-      }
-      n = 1;
-      file.save().then(res1 => {        //上传图片到同一条帖子
-        query.set('id', ID);            //根据帖子ID修改某条记录
-        query.set(imgname.concat(n.toString()), res1[n-1].url);
-        n = n + 1;
-        query.save().then(res2 => {
-          console.log(res2)
-        }).catch(err2 => {
-          console.log(err2)
+      var img_num = that.img_num
+      console.log("length")
+      console.log(img_num)
+      console.log(typeof img_num)
+      if (img_num > 0){
+        var file;
+        var imgname = "img";
+        var img_url = that.img_url
+        var n = 1;
+        var ID = res.objectId;            //获取帖子ID
+        for(let item of img_url){         //将图片上传到Bmob云端中
+          file = Bmob.File(imgname.concat(n.toString()).concat(".jpg"), item);
+          n = n + 1;
+        }
+        n = 1;
+        file.save().then(res1 => {        //上传图片到同一条帖子
+          query.set('id', ID);            //根据帖子ID修改某条记录
+          query.set(imgname.concat(n.toString()), res1[n-1].url);
+          n = n + 1;
+          query.save().then(res2 => {
+            console.log(res2)
+          }).catch(err2 => {
+            console.log(err2)
+          })
         })
-      })
+      }
       wx.hideLoading({
         success: (res) => {},
       })
