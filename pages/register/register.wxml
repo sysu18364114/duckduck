@@ -8,20 +8,7 @@ js文件中的用法，e.detail.value.userName.length-->
   <image class="login-img" src="/images/鸭子 duck.png"></image>
 
   <view class="login-item">
-    <!-- <view class="item-view">
-      <image class="input-image" src="/images/icons/account.png"></image>
-      <input class="input-box" placeholder="用户名" bindinput="userNameInput" />
-    </view>
-
-    <view class="line"></view>
-
-    <view class="item-view">
-      <image class="input-image" src="/images/icons/account.png"></image>
-      <input class="input-box" placeholder="邮箱" bindinput="userEmailInput" />
-    </view>
-
-    <view class="line"></view> -->
-
+    
     <view class="item-view">
       <image class="input-image" src="/images/icons/account.png"></image>
       <input class="input-box" placeholder="手机号码" bindinput="userPhoneNumberInput" />
@@ -51,5 +38,7 @@ js文件中的用法，e.detail.value.userName.length-->
     <view class="line"></view>
 
     <button class="button-2" bindtap="registerButtonClick">完成注册</button>
+    <!-- <view class="line"></view>
+    <button class="button-2" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" type="primary">获取手机号码</button> -->
   </view>
 </view>

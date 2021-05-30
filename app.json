@@ -21,7 +21,8 @@
     "pages/login_register/login_register",
     "pages/register/register",
     "pages/code_login/code_login",
-    "pages/passwd_login/passwd_login"
+    "pages/passwd_login/passwd_login",
+    "pages/user_info/user_info"
   ],
   "window":{
     "backgroundTextStyle":"light",

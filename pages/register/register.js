@@ -14,7 +14,7 @@ Page({
     smsId: '',
     smsCode: '',
 
-    userName: 'test',
+    userName: 'zch',
     userEmail: 'default@duck.com',
 
     passwdFirst: '',
@@ -31,31 +31,21 @@ Page({
       phoneNum: e.detail.value
     });
   },
-  // 这两个模块暂定调整到用户个人信息页面
-  // // 用户输入用户名事件
-  // userNameInput: function (event) {
-  //   this.setData({
-  //     userName: event.detail.value
-  //   })
-  // },
-  // // 用户输入邮箱事件
-  // userEmailInput: function (event) {
-  //   this.setData({
-  //     userEmail: event.detail.value
-  //   })
-  // },
+
   // 用户输入密码事件
   userPasswdFirstInput: function (event) {
     this.setData({
       passwdFirst: event.detail.value
     })
   },
+
   // 用户重复输入密码事件
   userPasswdSecondInput: function (event) {
     this.setData({
       passwdSecond: event.detail.value
     })
   },
+
   // 用户输入验证码事件
   userSmsCodeInput: function (event) {
     this.setData({
@@ -72,10 +62,6 @@ Page({
       console.error('smsCodeGetButtonClick: 手机号输入错误，错误的手机号为', phoneNum);
     } else {
       console.log(res);
-      // console.log('smsId:', res.smsId);
-      // this.setData({
-      //   smsId: res.smsId
-      // })
     }
   },
 
@@ -87,79 +73,75 @@ Page({
       return false;
     }
 
-    // // 如果用户没有填写用户名，则默认将手机号设置为用户名
-    // if (api_func.checkIsEmpty(this.data.userName)) {
-    //   this.setData({
-    //     userName: this.data.phoneNum
-    //   })
-    // }
-    // // 如果用户没有填写邮箱，则默认分配一个字符串作为邮箱
-    // if (api_func.checkIsEmpty(this.data.userEmail)) {
-    //   this.setData({
-    //     userEmail: 'default@duck.com'
-    //   })
-    // }
+    // 安全性检查通过，可以构造用户参数，以完成注册
+    var that = this;
+    let userparams = {
+      //username: that.data.userName,
+      password: that.data.passwdFirst,
+      //email: that.data.userEmail,
+      phone: that.data.phoneNum,
+    };
 
-    // 验证码核查，目的是确认用户的手机号有效可用
-    let smsCodeInput = this.data.smsCode
-    let phoneNumInput = {
-      mobilePhoneNumber: this.data.phoneNum
-    }
-    // verifySmsCode 方法返回值，成功时返回 {"msg": "ok"}
-    Bmob.verifySmsCode(smsCodeInput, phoneNumInput).then(function (res) {
-      console.log(res); // 这里显示 {msg: "ok"}
-      console.log('test');
-      // 往后就log不出来了？
-      let userparams = {
-        username: this.data.userName,
-        password: this.data.passwdFirst,
-        email: this.data.userEmail,
-        phone: this.data.phoneNum,
-      };
-      console.log('test2');
-      console.log(userparams);
-      Bmob.User.register(userparams).then(res => { // 将用户信息提交注册
-        wx.showToast({
-          title: '恭喜，注册成功',
-          icon: 'success',
-          duration: 1500
-        });
-        console.log('注册成功', res);
-        this.setData({
-          registerStatus: true,
-        });
-      }).catch(err => {
-        console.error(err)
-      });
-
-    }, function(err) {
+    // 验证码验证函数调用成功的回调函数
+    let verifySmsCodeSuccess = function (res) {
+      // 调用注册函数，传入用户参数进行注册
+      return Bmob.User.register(userparams); // 将该函数的返回值作为返回值返回
+    };
+    // 验证码验证函数调用失败的回调函数
+    let verifySmsCodeFailed = function (err) {
       wx.showToast({
         title: '抱歉，验证码错误',
         icon: 'error',
         duration: 1500
       });
+      console.log(userparams);
+      console.error(err);
+    };
+
+    // 注册函数调用成功的回调函数
+    let registerSuccess = function (res) {
+      // 根据返回值 res 来判定本次用户注册是否成功
+      if (res !== undefined) {
+        wx.showToast({
+          title: '恭喜，注册成功',
+          icon: 'success',
+          duration: 1500
+        });
+        console.log(userparams);
+        that.setData({
+          registerStatus: true,
+        });
+      } else {
+        wx.showToast({
+          title: '注册失败',
+          icon: 'error',
+          duration: 1500
+        });
+        console.log('注册失败');
+      }
+    };
+    // 注册函数调用失败的回调函数
+    let registerFailed = function (err) {
+      console.log(err);
+      console.log('调用注册函数不成功');
+    };
+
+    // 按照格式构造传入函数 Bmob.verifySmsCode 的参数
+    let smsCodeInput = this.data.smsCode
+    let phoneNumInput = {
+      mobilePhoneNumber: this.data.phoneNum
+    };
+    // 验证码核查，确认用户的手机号可用
+    Bmob.verifySmsCode(smsCodeInput, phoneNumInput).then(verifySmsCodeSuccess, verifySmsCodeFailed).then(registerSuccess, registerFailed).catch(err => {
       console.error(err);
     });
 
-    // 一系列检查通过，说明用户所填写的信息无误，注册可以完成
+    // 一系列检查通过，说明用户所填写的信息无误，可以完成注册
     if (this.registerStatus == true) {
       wx.setStorageSync('userRegisterInfo', this.data); // 将用户信息存到本地缓存
       wx.navigateTo({
         url: '/pages/login_register/login_register'
-      }) // 跳转到下一个页面（登陆页面）
+      }) // 跳转到登录页面
     }
   },
-
-  // // 用户选择使用密码登陆
-  // passwdLogin: function () {
-  //   wx.navigateTo({
-  //     url: '/pages/enroll/enroll'
-  //   })
-  // },
-  // // 用户选择使用手机验证码登陆
-  // smsCodeLogin: function () {
-  //   wx.navigateTo({
-  //     url: '/pages/smscodelogin/smscodelogin',
-  //   })
-  // },
 })

@@ -12,7 +12,7 @@ Page({
     mine_pic: "/images/绿我的.png",
     loginStatus: false,
     testName:"玉树临风",
-    userInfo: {}
+    userInfo: getApp().globalData.userInfo,
   },
 
   display:function(){

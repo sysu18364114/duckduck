@@ -10,8 +10,8 @@ Page({
     canIUseGetUserProfile: false,
   },
 
-  next: function(e){
-    console.log("userInfo",getApp().globalData.userInfo)
+  next: function (e) {
+    console.log("userInfo", getApp().globalData.userInfo)
     wx.redirectTo({
       url: '/pages/main/main'
     })
@@ -19,7 +19,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     wx.showLoading({
       title: '加载中',
     })
@@ -30,10 +30,10 @@ Page({
       })
     }
 
-    setTimeout(function (){
+    setTimeout(function () {
       wx.hideLoading()
-    },2000)
-  }, 
+    }, 2000)
+  },
 
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
