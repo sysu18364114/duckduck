@@ -1,19 +1,129 @@
 <!--pages/login_register/login_register.wxml-->
-<view class="container">
 
-    <image class="login-img" src="/images/鸭子 duck.png"></image>
+<!--TODO: 增加一个返回按钮-->
+<block wx:if="{{status===0}}">
+    <view class="container">
 
-    <view class="text-view">
-        <text class="text-style">请选择您的登陆方式</text>
+        <image class="login-img" src="/images/鸭子 duck.png"></image>
+
+        <view class="text-view">
+            <text class="text-style">请选择您的登陆方式</text>
+        </view>
+
+        <!-- 选择登陆方式 -->
+        <view class="line"></view>
+        <button class="button-2" bindtap="smsCodeLoginBlock">验证码登陆</button>
+        <view class="line"></view>
+        <button class="button-2" bindtap="passwdLoginBlock">密码登陆</button>
+        <!-- 没有账户要先完成注册 -->
+        <view class="line"></view>
+        <button class="button-2 button-color" bindtap="registerBlock">没有账号？立即注册</button>
+        <view class="line"></view>
     </view>
+</block>
 
-    <!-- 选择登陆方式 -->
-    <view class="line"></view>
-    <button class="button-2" bindtap="smsCodeButtonClick">验证码登陆</button>
-    <view class="line"></view>
-    <button class="button-2" bindtap="passwdButtonClick">密码登陆</button>
-    <!-- 没有账户要先完成注册 -->
-    <view class="line"></view>
-    <button class="button-2 button-color" bindtap="registerButtonClick">没有账号？立即注册</button>
-    <view class="line"></view>
-</view>
+<block wx:if="{{status===1}}">
+    <view class="container">
+
+        <image class="login-img" src="/images/鸭子 duck.png"></image>
+
+        <view class="text-view">
+            <text class="text-style">验证码登陆</text>
+        </view>
+        <view class="line"></view>
+
+        <view class="login-item">
+
+            <view class="item-view">
+                <image class="input-image" src="/images/icons/account.png"></image>
+                <input class="input-box" placeholder="手机号码" bindinput="userPhoneNumberInput" />
+            </view>
+
+            <view class="line"></view>
+
+            <view class="item-view">
+                <image class="input-image" src="/images/icons/account.png"></image>
+                <input class="input-box-code" name="smsInput" placeholder="请输入验证码" bindinput="userSmsCodeInput" />
+                <button class="button-1" bindtap="smsCodeGetButtonClick">获取验证码</button>
+            </view>
+
+            <view class="line"></view>
+
+            <button class="button-2" bindtap="loginButtonClick">登陆账户</button>
+            <view class="line"></view>
+            <button class="button-2 button-color" bindtap="getBack">返回上一级</button>
+        </view>
+    </view>
+</block>
+
+<block wx:if="{{status===2}}">
+    <view class="container">
+
+        <image class="login-img" src="/images/鸭子 duck.png"></image>
+
+        <view class="login-item">
+
+            <view class="line"></view>
+
+            <view class="item-view">
+                <image class="input-image" src="/images/icons/account.png"></image>
+                <input class="input-box" placeholder="手机号码" bindinput="phoneNumInput" />
+            </view>
+
+            <view class="line"></view>
+
+            <view class="item-view">
+                <image class="input-image" src="/images/icons/account.png"></image>
+                <input class="input-box" password placeholder="密码" bindinput="passwdInput" />
+            </view>
+
+            <view class="line"></view>
+
+            <button class="button-2" bindtap="passwdLogin">登陆账户</button>
+            <view class="line"></view>
+            <button class="button-2 button-color" bindtap="getBack">返回上一级</button>
+        </view>
+    </view>
+</block>
+
+<block wx:if="{{status===3}}">
+    <view class="container">
+
+        <image class="login-img" src="/images/鸭子 duck.png"></image>
+
+        <view class="login-item">
+
+            <view class="item-view">
+                <image class="input-image" src="/images/icons/account.png"></image>
+                <input class="input-box" placeholder="手机号码" bindinput="userPhoneNumberInput" />
+            </view>
+
+            <view class="line"></view>
+
+            <view class="item-view">
+                <image class="input-image" src="/images/icons/account.png"></image>
+                <input class="input-box-code" name="smsInput" placeholder="请输入验证码" bindinput="userSmsCodeInput" />
+                <button class="button-1" bindtap="smsCodeGetButtonClick">获取验证码</button>
+            </view>
+
+            <view class="line"></view>
+
+            <view class="item-view">
+                <image class="input-image" src="/images/icons/account.png"></image>
+                <input class="input-box" password placeholder="密码(6至20位数字，字母组合)" bindinput="userPasswdFirstInput" />
+            </view>
+
+            <view class="line"></view>
+
+            <view class="item-view">
+                <image class="input-image" src="/images/icons/account.png"></image>
+                <input class="input-box" password placeholder="重复一遍密码" bindinput="userPasswdSecondInput" />
+            </view>
+            <view class="line"></view>
+
+            <button class="button-2" bindtap="registerButtonClick">完成注册</button>
+            <view class="line"></view>
+            <button class="button-2 button-color" bindtap="getBack">返回上一级</button>
+        </view>
+    </view>
+</block>
