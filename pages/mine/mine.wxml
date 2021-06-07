@@ -6,7 +6,7 @@
     <view class="avatar flex-item">
       <image class="userinfo-avatar" src="/images/鸭子 duck.png" background-size="cover" bindtap="registerSelect"></image>
     </view>
-    <view class="user-info flex-item">
+    <view class="user-info flex-item" bindtap="userInfo_select">
       <text class="userinfo-nickname">你好！</text>
       <text class="edit">请点击左侧头像注册/登录</text>
     </view>

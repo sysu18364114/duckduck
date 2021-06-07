@@ -46,6 +46,12 @@ Page({
     })
   },
 
+  userInfo_select: function(){
+    wx.redirectTo({
+      url: '../user_info/user_info',
+    })
+  },
+
   mine_select: function(){
     /*wx.redirectTo({
       url: '../mine/mine',

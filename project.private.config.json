@@ -27,6 +27,12 @@
                 {
                     "name": "pages/login_register/login_register",
                     "pathName": "pages/login_register/login_register",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/user_info/user_info",
+                    "pathName": "pages/user_info/user_info",
                     "scene": null
                 }
             ]

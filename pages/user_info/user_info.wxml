@@ -1,2 +1,50 @@
 <!--pages/user_info/user_info.wxml-->
-<text>pages/user_info/user_info.wxml</text>
+
+<!-- <view wx:if="{{modifyStatus===false}}" class="container"> -->
+<!-- <image class="login-img" src="/images/鸭子 duck.png"></image> -->
+<view wx:if="{{!modifyStatus}}" class="container">
+    <view class="info-box">
+        <view style="text-align: center;margin-bottom:10%;">
+        <!-- <image class="avatar-img" src="{{avatarUrl}}" /> -->
+            <van-image round="true" width="5rem" height="5rem" src="{{avatarUrl}}" />
+        </view>
+    </view>
+
+    <text>来自微信的信息</text>
+    <text>昵称： {{nickName}}</text>
+    <text>性别： {{gender}}</text>
+    <text>国家： {{country}}</text>
+    <text>省份： {{province}}</text>
+    <text>城市： {{city}}</text>
+    <text>用户填写的信息</text>
+    <text>出生日期： </text>
+    <!--这里应该采取日期选择框-->
+    <text>个性签名： {{sentence}}</text>
+    <view style="margin-top:20%">
+    <button bindtap="statusSwitch">修改个人信息</button>
+</view>
+</view>
+
+
+
+<view wx:if="{{modifyStatus===true}}" class="container">
+    <view class="info-box">
+        <view style="text-align: center;margin-bottom:10%;">
+            <image class="avatar-img" src="{{avatarUrl}}" />
+        </view>
+
+        <text>来自微信的信息</text>
+        <input placeholder="{{nickName}}">昵称： {{nickName}}</input>
+        <input placeholder="{{gender}}">性别： {{gender}}</input>
+        <input placeholder="{{country}}">国家： {{country}}</input>
+        <input placeholder="{{province}}">省份： {{province}}</input>
+        <input placeholder="{{city}}">城市： {{city}}</input>
+        <text>用户填写的信息</text>
+        <input placeholder="{{birthday}}">出生日期： </input>
+        <input placeholder="{{sentence}}">个性签名： {{sentence}}</input>
+    </view>
+
+    <view style="margin-top:20%">
+        <button bindtap="statusSwitch">确认</button>
+    </view>
+</view>
