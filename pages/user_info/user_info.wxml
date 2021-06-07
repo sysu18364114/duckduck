@@ -1,50 +1,65 @@
 <!--pages/user_info/user_info.wxml-->
-
-<!-- <view wx:if="{{modifyStatus===false}}" class="container"> -->
-<!-- <image class="login-img" src="/images/鸭子 duck.png"></image> -->
-<view wx:if="{{!modifyStatus}}" class="container">
+<!-- TODO: 进一步优化页面布局；统一页面的颜色/风格；做输入框的数据绑定以及信息页面的数据显示 -->
+<view wx:if="{{!modifyStatus}}" class="container" style="padding:100rpx 0">
     <view class="info-box">
         <view style="text-align: center;margin-bottom:10%;">
-        <!-- <image class="avatar-img" src="{{avatarUrl}}" /> -->
             <van-image round="true" width="5rem" height="5rem" src="{{avatarUrl}}" />
         </view>
     </view>
 
-    <text>来自微信的信息</text>
-    <text>昵称： {{nickName}}</text>
-    <text>性别： {{gender}}</text>
-    <text>国家： {{country}}</text>
-    <text>省份： {{province}}</text>
-    <text>城市： {{city}}</text>
-    <text>用户填写的信息</text>
-    <text>出生日期： </text>
-    <!--这里应该采取日期选择框-->
-    <text>个性签名： {{sentence}}</text>
-    <view style="margin-top:20%">
-    <button bindtap="statusSwitch">修改个人信息</button>
+    <van-cell-group>
+        <van-cell title="昵称" value="{{nickName}}" title-width="500rpx" />
+        <van-cell title="性别" value="{{gender}}" />
+        <van-cell title="国家" value="{{country}}" />
+        <van-cell title="城市" value="{{city}}" />
+        <van-cell title="出生日期" value="{{nickName}}" title-width="500rpx" />
+        <van-cell title="个性签名" value="{{sentence}}" />
+    </van-cell-group>
+
+    <view style="margin-top:10%">
+        <van-button plain type="primary" bind:click="statusSwitch">修改个人信息</van-button>
+    </view>
 </view>
-</view>
 
-
-
-<view wx:if="{{modifyStatus===true}}" class="container">
+<view wx:if="{{modifyStatus===true}}" class="container" style="padding:100rpx 0">
+    <!-- 微信获取的用户头像，允许从手机相册中选取照片更改头像 -->
     <view class="info-box">
         <view style="text-align: center;margin-bottom:10%;">
-            <image class="avatar-img" src="{{avatarUrl}}" />
+            <van-image round="true" width="5rem" height="5rem" src="{{avatarUrl}}" bind:click="selectNewAvatar" />
         </view>
-
-        <text>来自微信的信息</text>
-        <input placeholder="{{nickName}}">昵称： {{nickName}}</input>
-        <input placeholder="{{gender}}">性别： {{gender}}</input>
-        <input placeholder="{{country}}">国家： {{country}}</input>
-        <input placeholder="{{province}}">省份： {{province}}</input>
-        <input placeholder="{{city}}">城市： {{city}}</input>
-        <text>用户填写的信息</text>
-        <input placeholder="{{birthday}}">出生日期： </input>
-        <input placeholder="{{sentence}}">个性签名： {{sentence}}</input>
     </view>
 
-    <view style="margin-top:20%">
-        <button bindtap="statusSwitch">确认</button>
+    <van-cell-group>
+        <!-- 需要用户手动输入的信息 -->
+        <van-field label="昵称" value="{{ value }}" placeholder="{{nickName}}" border="{{ false }}"
+            bind:change="onChange" />
+        <van-field label="性别" value="{{ value }}" placeholder="{{gender}}" border="{{ false }}"
+            bind:change="onChange" />
+        <van-field label="国家" value="{{ value }}" placeholder="{{country}}" border="{{ false }}"
+            bind:change="onChange" />
+        <van-field label="城市" value="{{ value }}" placeholder="{{city}}" border="{{ false }}" bind:change="onChange" />
+        <van-field label="个性签名" value="{{ value }}" placeholder="{{sentence}}" border="{{ false }}"
+            bind:change="onChange" />
+
+        <!--列表选择-->
+        <van-cell title="性别" is-link bind:click="showPopupGender" />
+        <van-popup show="{{ genderShow }}" bind:close="onCloseGender" position="bottom">
+            <view>
+                <van-picker show-toolbar title="请选择您的性别" columns="{{ genderColumns }}" bind:change="onChangeGender"
+                    bind:confirm="confirmFnGender" bind:cancel="cancelFnGender" />
+            </view>
+        </van-popup>
+        <!--时间选择-->
+        <van-cell title="生日" is-link bind:click="showPopup" />
+        <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
+            <view>
+                <van-datetime-picker type="date" value="{{ currentDate }}" bind:input="onInput" min-date="{{ minDate }}"
+                    formatter="{{ formatter }}" bind:confirm="confirmFn" bind:cancel="cancelFn" />
+            </view>
+        </van-popup>
+    </van-cell-group>
+
+    <view style="margin-top:10%">
+        <van-button plain type="primary" bind:click="statusSwitch">确认修改</van-button>
     </view>
 </view>

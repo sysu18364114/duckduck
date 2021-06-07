@@ -1,0 +1,102 @@
+<!--pages/projectadd/add.wxml-->
+<view class="container">
+  <view class="common-header-xian"></view>
+  
+  <!-- 表单 -->
+  <form bindreset="formReset" bindsubmit="saveData">
+    <view class="address-cont-title b-f b-b">
+
+    <view class="list address-box dis-flex b-b">
+        <view class="left-name">
+          <text class="f-30">项目类别</text>
+        </view>
+        <view class="right-cont dis-flex">
+          <input  disabled="disabled"  value="{{catename}}"></input>
+          <input name="cate" disabled="disabled" style="display:none" value="{{cateid}}"></input>
+          <input name="openid" disabled="disabled" style="display:none" value="{{openid}}"></input>
+     
+        </view>
+      </view>
+
+      <view class="list address-box dis-flex b-b">
+        <view class="left-name">
+          <text class="f-30">项目标题</text>
+        </view>
+        <view class="right-cont dis-flex">
+          <input name="title" placeholder="请输入项目标题" value=""></input>
+        </view>
+      </view>
+
+
+       <view class="list address-box dis-flex b-b"  bindtap="showPopup">
+        <view class="left-name">
+          <text class="f-30">起始时间</text>
+        </view>
+        <view class="right-cont dis-flex" >
+          <input name="start_date" readonly="readonly" placeholder="请设置起始时间" value="{{start_date}}"></input>
+        </view>
+      </view>
+     
+
+        <view class="list address-box dis-flex b-b" bindtap="showPopup1">
+        <view class="left-name">
+          <text class="f-30">结束时间</text>
+        </view>
+        <view class="right-cont dis-flex">
+          <input name="end_date" readonly="readonly" placeholder="请设置结束时间" value="{{end_date}}"></input>
+        </view>
+      </view>
+       <view class="list address-box dis-flex b-b">
+        <view class="left-name">
+          <text class="f-30">项目描述</text>
+        </view>
+        <view class="right-cont dis-flex">
+          <input name="desc" placeholder="请输入项目描述" value=""></input>
+        </view>
+      </view>
+      
+   
+    </view>
+
+
+
+
+    <view class="padding-box m-top35 profile-btn">
+      <button formType="submit" disabled="{{disabled}}">保存</button>
+    </view>
+
+
+  </form>
+
+<!--start时间选择-->
+<van-popup show="{{ show }}" bind:close="onClose"  position="bottom">
+  <view>
+  <van-datetime-picker
+  type="date"
+  value="{{ currentDate }}"
+  bind:input="onInput"
+  min-date="{{ minDate }}"
+  formatter="{{ formatter }}"
+  bind:confirm="confirmFn"
+  bind:cancel="cancelFn"
+/>
+  </view>
+</van-popup>
+<!--时间选择-->
+
+<!--end时间选择-->
+<van-popup show="{{ show1 }}" bind:close="onClose"  position="bottom">
+  <view>
+  <van-datetime-picker
+  type="date"
+  value="{{ currentDate1 }}"
+  bind:input="onInput1"
+  min-date="{{ minDate }}"
+  formatter="{{ formatter }}"
+  bind:confirm="confirmFn1"
+  bind:cancel="cancelFn"
+/>
+  </view>
+</van-popup>
+<!--时间选择-->
+</view>

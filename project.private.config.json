@@ -33,6 +33,12 @@
                 {
                     "name": "pages/user_info/user_info",
                     "pathName": "pages/user_info/user_info",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/test_page/test_page",
+                    "pathName": "pages/test_page/test_page",
                     "scene": null
                 }
             ]

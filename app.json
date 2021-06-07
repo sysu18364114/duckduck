@@ -17,7 +17,8 @@
     "pages/lost_found/lost_found",
     "pages/idle/idle",
     "pages/login_register/login_register",
-    "pages/user_info/user_info"
+    "pages/user_info/user_info",
+    "pages/test_page/test_page"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,7 +32,13 @@
     "van-field": "@vant/weapp/field/index",
     "mp-dialog": "weui-miniprogram/dialog/dialog",
     "mp-icon": "weui-miniprogram/icon/icon",
-    "van-image": "@vant/weapp/image/index"
+    "van-image": "@vant/weapp/image/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index"
   },
   "useExtendedLib": {
     "kbone": true,
