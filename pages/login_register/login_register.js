@@ -69,9 +69,9 @@ Page({
     // 验证码登陆
 
     loginButtonClick: function () {
-        var phoneNum=Number(this.data.phoneNum);
-        var smsCode=Number(this.data.smsCode);
-        
+        var phoneNum = Number(this.data.phoneNum);
+        var smsCode = Number(this.data.smsCode);
+
         console.log(phoneNum);
         console.log(smsCode);
 

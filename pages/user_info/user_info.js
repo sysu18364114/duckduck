@@ -1,6 +1,10 @@
 // pages/user_info/user_info.js
 
 const util = require('../libs/util.js');
+const defaultStr='待输入';
+const defaultGender=0;
+const defaultImagePath='/images/鸭子 duck.png';
+
 // TODO: 整理函数；构造打包数据；撰写注释
 Page({
 
@@ -15,10 +19,9 @@ Page({
     show: false,
 
     genderColumns: ['男', '女', '其他'],
-    genderSelected: undefined,
 
     currentDate: new Date().getTime(),
-    minDate: new Date().getTime(),
+    minDate: new Date(1900, 1, 1).getTime(),
     formatter(type, value) {
       if (type === 'year') {
         return `${value}年`;
@@ -44,20 +47,20 @@ Page({
   },
 
   selectNewAvatar() {
-    var that=this;
+    var that = this;
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success (res) {
+      success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
         that.setData({
-          newAvatarUrl:tempFilePaths
+          newAvatarUrl: tempFilePaths
         });
       },
-      failed (res){
-        console.log('照片选取失败：',res);
+      failed(res) {
+        console.log('照片选取失败：', res);
       }
     });
   },
@@ -72,14 +75,7 @@ Page({
       genderShow: false
     });
   },
-  onChangeGender(event) {
-    const {
-      picker,
-      value,
-      index
-    } = event.detail;
-    console.log(`当前值：${value}, 当前索引：${index}`);
-  },
+
   confirmFnGender(event) {
     const {
       picker,
@@ -88,7 +84,7 @@ Page({
     } = event.detail;
     console.log(`当前值：${value}, 当前索引：${index}`);
     this.setData({
-      genderSelected: value,
+      gender: value,
       genderShow: false
     });
   },
@@ -128,21 +124,19 @@ Page({
   },
 
   // 时间-确定按钮
-  confirmFn(e) {
-    var newTime = new Date(e.detail);
-    newTime = util.formatTime(newTime);
+  confirmBirthday(event) {
+    var newTime = new Date(event.detail);
+    newTime = util.formatTime(newTime, 'YYYY-MM-DD');
+    console.log(event.detail);
     this.setData({
-      start_date: newTime
-    });
-    console.log(e.detail);
-    this.setData({
+      birthday: newTime,
       show: false
     });
 
   },
 
   // 时间-取消按钮
-  cancelFn() {
+  cancelBirthday() {
     this.setData({
       show: false
     });
@@ -156,27 +150,64 @@ Page({
     });
   },
 
+  onChangeNickName: function (event) {
+    this.setData({
+      nickName: event.detail
+    });
+  },
+
+  onChangeGender(event) {
+    const {
+      picker,
+      value,
+      index
+    } = event.detail;
+    console.log(`当前值：${value}, 当前索引：${index}`);
+    this.setData({
+      gender: value
+    });
+  },
+
+  onChangeCountry: function (event) {
+    this.setData({
+      country: event.detail
+    });
+  },
+
+  onChangeCity: function (event) {
+    this.setData({
+      city: event.detail
+    });
+  },
+
+  onChangeSentence: function (event) {
+    this.setData({
+      sentence: event.detail
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this;
-
     var userInfo = getApp().globalData.userInfo;
     console.log(userInfo);
-    var nickName = userInfo.nickName
-    var avatarUrl = userInfo.avatarUrl
-    var gender = userInfo.gender // 性别 0：未知, 1：男, 2：女
-    var province = userInfo.province
-    var city = userInfo.city
-    var country = userInfo.country
+
+    var nickName = userInfo.nickName;
+    var avatarUrl = userInfo.avatarUrl ? userInfo.avatarUrl : defaultImagePath;
+    var gender = userInfo.gender ? userInfo.gender : defaultGender; // 性别 0：未知, 1：男, 2：女
+    var province = userInfo.province ? userInfo.province : defaultStr;
+    var city = userInfo.city ? userInfo.city : defaultStr;
+    var country = userInfo.country ? userInfo.country : defaultStr;
     if (gender == 1) {
-      gender = '男'
+      gender = '男';
     } else if (gender == 2) {
-      gender = '女'
+      gender = '女';
     } else {
-      gender = '未知'
+      gender = '未知';
     }
+
     that.setData({
       nickName: nickName,
       avatarUrl: avatarUrl,

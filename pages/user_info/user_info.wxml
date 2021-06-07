@@ -12,7 +12,7 @@
         <van-cell title="性别" value="{{gender}}" />
         <van-cell title="国家" value="{{country}}" />
         <van-cell title="城市" value="{{city}}" />
-        <van-cell title="出生日期" value="{{nickName}}" title-width="500rpx" />
+        <van-cell title="出生日期" value="{{birthday}}" title-width="500rpx" />
         <van-cell title="个性签名" value="{{sentence}}" />
     </van-cell-group>
 
@@ -24,23 +24,24 @@
 <view wx:if="{{modifyStatus===true}}" class="container" style="padding:100rpx 0">
     <!-- 微信获取的用户头像，允许从手机相册中选取照片更改头像 -->
     <view class="info-box">
-        <view style="text-align: center;margin-bottom:10%;">
+        <view style="text-align:center;">
             <van-image round="true" width="5rem" height="5rem" src="{{avatarUrl}}" bind:click="selectNewAvatar" />
         </view>
+        <view style="text-align:center;">
+            <van-icon name="upgrade" size="20px" />
+        </view>
     </view>
-
+    <van-divider />
     <van-cell-group>
         <!-- 需要用户手动输入的信息 -->
         <van-field label="昵称" value="{{ value }}" placeholder="{{nickName}}" border="{{ false }}"
-            bind:change="onChange" />
-        <van-field label="性别" value="{{ value }}" placeholder="{{gender}}" border="{{ false }}"
-            bind:change="onChange" />
+            bind:change="onChangeNickName" />
         <van-field label="国家" value="{{ value }}" placeholder="{{country}}" border="{{ false }}"
-            bind:change="onChange" />
-        <van-field label="城市" value="{{ value }}" placeholder="{{city}}" border="{{ false }}" bind:change="onChange" />
+            bind:change="onChangeCountry" />
+        <van-field label="城市" value="{{ value }}" placeholder="{{city}}" border="{{ false }}" bind:change="onChangeCity" />
         <van-field label="个性签名" value="{{ value }}" placeholder="{{sentence}}" border="{{ false }}"
-            bind:change="onChange" />
-
+            bind:change="onChangeSentence" />
+        <van-divider />
         <!--列表选择-->
         <van-cell title="性别" is-link bind:click="showPopupGender" />
         <van-popup show="{{ genderShow }}" bind:close="onCloseGender" position="bottom">
@@ -54,7 +55,7 @@
         <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
             <view>
                 <van-datetime-picker type="date" value="{{ currentDate }}" bind:input="onInput" min-date="{{ minDate }}"
-                    formatter="{{ formatter }}" bind:confirm="confirmFn" bind:cancel="cancelFn" />
+                    formatter="{{ formatter }}" bind:confirm="confirmBirthday" bind:cancel="cancelBirthday" />
             </view>
         </van-popup>
     </van-cell-group>

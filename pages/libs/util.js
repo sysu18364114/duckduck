@@ -43,7 +43,6 @@ export function formatTime (time = 0, format = 'YYYY-MM-DD hh:mm:ss') {
             D = H / 24,   //天
             W = D / 7    //周
   
-           
          /**
               ~~ ==>表示取整数部分 类似与 parseInt
           */
