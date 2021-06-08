@@ -12,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    type:0,
 
     newAvatarUrl: undefined,
 
@@ -76,7 +77,7 @@ Page({
     });
   },
 
-  confirmFnGender(event) {
+  confirmGender(event) {
     const {
       picker,
       value,
@@ -88,7 +89,7 @@ Page({
       genderShow: false
     });
   },
-  cancelFnGender() {
+  cancelGender() {
     this.setData({
       genderShow: false
     });

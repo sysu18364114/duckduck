@@ -2,7 +2,7 @@
 <!-- TODO: 进一步优化页面布局；统一页面的颜色/风格；做输入框的数据绑定以及信息页面的数据显示 -->
 <view wx:if="{{!modifyStatus}}" class="container" style="padding:100rpx 0">
     <view class="info-box">
-        <view style="text-align: center;margin-bottom:10%;">
+        <view style="text-align:center;margin-bottom:10%;">
             <van-image round="true" width="5rem" height="5rem" src="{{avatarUrl}}" />
         </view>
     </view>
@@ -16,8 +16,11 @@
         <van-cell title="个性签名" value="{{sentence}}" />
     </van-cell-group>
 
-    <view style="margin-top:10%">
+    <view wx:if="{{type===0}}"style="margin-top:10%">
         <van-button plain type="primary" bind:click="statusSwitch">修改个人信息</van-button>
+    </view>
+    <view wx:if="{{type===1}}"style="margin-top:10%">
+        <van-button plain type="primary" bind:click="startChat">发起聊天</van-button>
     </view>
 </view>
 
@@ -47,7 +50,7 @@
         <van-popup show="{{ genderShow }}" bind:close="onCloseGender" position="bottom">
             <view>
                 <van-picker show-toolbar title="请选择您的性别" columns="{{ genderColumns }}" bind:change="onChangeGender"
-                    bind:confirm="confirmFnGender" bind:cancel="cancelFnGender" />
+                    bind:confirm="confirmGender" bind:cancel="cancelGender" />
             </view>
         </van-popup>
         <!--时间选择-->
